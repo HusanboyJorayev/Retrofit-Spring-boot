@@ -2,11 +2,9 @@ package org.example.retrofitspring_boot.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.retrofitspring_boot.model.Post;
+import org.example.retrofitspring_boot.model.PostCreate;
 import org.example.retrofitspring_boot.service.PostService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public Post getPost(@PathVariable int id) {
         return postService.getPostById(id);
+    }
+
+    @PostMapping("/create")
+    public Post createPost(@RequestBody PostCreate post) {
+        return postService.createPost(post);
     }
 }

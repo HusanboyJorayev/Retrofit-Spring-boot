@@ -2,6 +2,7 @@ package org.example.retrofitspring_boot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.retrofitspring_boot.model.Post;
+import org.example.retrofitspring_boot.model.PostCreate;
 import org.example.retrofitspring_boot.service.PostApi;
 import org.example.retrofitspring_boot.service.PostService;
 import org.example.retrofitspring_boot.util.RetrofitUtil;
@@ -45,5 +46,17 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException(e);
         }
         return post;
+    }
+
+    @Override
+    public Post createPost(PostCreate post) {
+        Call<Post> createPost = postApi.createPost(post);
+        Post createdPost;
+        try {
+            createdPost = createPost.execute().body();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return createdPost;
     }
 }
